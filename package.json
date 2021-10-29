@@ -1,23 +1,18 @@
 {
   "name": "graphql-security-whitelist",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "author": "",
   "license": "ISC",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "example/*",
-      "packages/*"
-    ]
-  },
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "dev": "pm2 start ecosystem.config.js",
     "stop": "pm2 delete ecosystem.config.js",
     "restart": "yarn stop && yarn dev",
     "log": "pm2 log",
     "example:codegen": "graphql-codegen --config codegen-example.yml",
-    "lint": "prettier --check . && eslint . && yarn workspaces run tsc --noEmit",
+    "lint": "prettier --check . && eslint .",
     "test": "jest"
   },
   "devDependencies": {
@@ -30,6 +25,7 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.2",
     "jest": "^27.3.1",
+    "lerna": "^4.0.0",
     "pm2": "^5.1.2",
     "prettier": "^2.4.1",
     "prettier-plugin-organize-imports": "^2.3.4",
