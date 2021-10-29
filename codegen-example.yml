@@ -1,0 +1,16 @@
+overwrite: true
+schema: ['example/api/src/**/*schema.ts']
+documents: ['example/app/src/**/*.tsx']
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+generates:
+  example/api/src/generated/graphql-whitelist.json:
+    plugins:
+      - packages/graphql-codegen-plugin:
+          output: server
+
+  example/app/src/generated/graphql-whitelist.json:
+    plugins:
+      - packages/graphql-codegen-plugin:
+          output: client

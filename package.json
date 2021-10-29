@@ -1,0 +1,42 @@
+{
+  "name": "graphql-security-whitelist",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "example/*",
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "dev": "pm2 start ecosystem.config.js",
+    "stop": "pm2 delete ecosystem.config.js",
+    "restart": "yarn stop && yarn dev",
+    "log": "pm2 log",
+    "example:codegen": "graphql-codegen --config codegen-example.yml",
+    "lint": "prettier --check . && eslint . && yarn workspaces run tsc --noEmit",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.2.1",
+    "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "jest": "^27.3.1",
+    "pm2": "^5.1.2",
+    "prettier": "^2.4.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
+  },
+  "resolutions": {
+    "graphql": "^15.5.0"
+  }
+}
