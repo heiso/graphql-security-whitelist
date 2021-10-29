@@ -1,11 +1,12 @@
 {
   "name": "@graphql-security-whitelist/apollo-client-link",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.4+675eb27",
   "description": "",
   "license": "ISC",
   "main": "dist/src",
   "types": "dist/src",
   "scripts": {
+    "prepublishOnly": "tsc",
     "watch": "tsc -w --pretty --preserveWatchOutput"
   },
   "devDependencies": {
@@ -17,5 +18,13 @@
   "peerDependencies": {
     "@apollo/client": "^3.0.0",
     "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
-  }
+  },
+  "files": [
+    "dist/src",
+    "package.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "675eb275e03fbaaf9bfb166dac2cc5c126f95d11"
 }
