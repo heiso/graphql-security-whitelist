@@ -19,6 +19,6 @@ jobs:
       - name: publish
         run: |
           yarn --frozen-lockfile
-          npx lerna publish --canary -y
+          npx lerna publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

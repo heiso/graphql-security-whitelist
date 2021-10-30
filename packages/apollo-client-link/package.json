@@ -1,6 +1,6 @@
 {
   "name": "@graphql-security-whitelist/apollo-client-link",
-  "version": "0.0.1-alpha.4+675eb27",
+  "version": "0.0.1-alpha.0",
   "description": "",
   "license": "ISC",
   "main": "dist/src",
