@@ -1,6 +1,6 @@
 {
   "name": "@graphql-security-whitelist/graphql-codegen-plugin",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1",
   "description": "GraphQL Code Generator plugin for generating queries and mutations whitelists",
   "license": "ISC",
   "main": "dist/src",
