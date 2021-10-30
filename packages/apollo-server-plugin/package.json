@@ -1,11 +1,12 @@
 {
   "name": "@graphql-security-whitelist/apollo-server-plugin",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "",
   "license": "ISC",
   "main": "dist/src",
   "types": "dist/src",
   "scripts": {
+    "prepublishOnly": "tsc",
     "watch": "tsc -w --pretty --preserveWatchOutput"
   },
   "devDependencies": {
@@ -15,5 +16,13 @@
   "peerDependencies": {
     "apollo-server": "^3.4.0",
     "apollo-server-plugin-base": "^3.3.0"
-  }
+  },
+  "files": [
+    "dist/src",
+    "package.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "675eb275e03fbaaf9bfb166dac2cc5c126f95d11"
 }
