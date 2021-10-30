@@ -5,6 +5,11 @@
   "license": "ISC",
   "main": "dist/src",
   "types": "dist/src",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heiso/graphql-security-whitelist.git",
+    "directory": "packages/apollo-client-link"
+  },
   "scripts": {
     "prepublishOnly": "tsc",
     "watch": "tsc -w --pretty --preserveWatchOutput"

@@ -4,6 +4,11 @@
   "description": "GraphQL Code Generator plugin for generating queries and mutations whitelists",
   "license": "ISC",
   "main": "dist/src",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heiso/graphql-security-whitelist.git",
+    "directory": "packages/graphql-codegen-plugin"
+  },
   "scripts": {
     "prepublishOnly": "tsc",
     "watch": "tsc -w --pretty --preserveWatchOutput"
