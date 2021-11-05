@@ -9,8 +9,10 @@ generates:
     plugins:
       - packages/graphql-codegen-plugin:
           output: server
+          version: ${WHITELIST_VERSION:latest}
 
   example/app/src/generated/graphql-whitelist.json:
     plugins:
       - packages/graphql-codegen-plugin:
           output: client
+          version: ${WHITELIST_VERSION:latest}

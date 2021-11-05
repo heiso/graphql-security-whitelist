@@ -2,16 +2,20 @@ import { ApolloLink } from '@apollo/client'
 
 export type SecurityWhitelistLinkConfig = {
   whitelist: Record<string, string>
-  version?: string
 }
 
-export function securityWhitelistLink({
-  whitelist,
-  version,
-}: SecurityWhitelistLinkConfig): ApolloLink {
+export function securityWhitelistLink({ whitelist }: SecurityWhitelistLinkConfig): ApolloLink {
   return new ApolloLink((operation, forward) => {
     if (!forward) {
       throw new Error('securityWhitelistLink cannot be the last link in the chain.')
+    }
+
+    if (!whitelist[operation.operationName]) {
+      throw new Error('operation not found in given whitelist.')
+    }
+
+    if (!whitelist.version) {
+      throw new Error('version not found in given whitelist.')
     }
 
     operation.setContext({
@@ -22,7 +26,7 @@ export function securityWhitelistLink({
     })
 
     operation.extensions.securityWhitelist = {
-      version,
+      version: whitelist.version,
       hash: whitelist[operation.operationName],
     }
 

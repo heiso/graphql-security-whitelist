@@ -11,7 +11,7 @@
     "stop": "pm2 delete ecosystem.config.js",
     "restart": "yarn stop && yarn dev",
     "log": "pm2 log",
-    "example:codegen": "graphql-codegen --config codegen-example.yml",
+    "example:codegen": "graphql-codegen --config example/codegen.yml",
     "lint": "prettier --check . && eslint .",
     "test": "jest"
   },

@@ -19,3 +19,8 @@ jobs:
         run: |
           yarn --frozen-lockfile
           yarn test
+
+      - name: Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}

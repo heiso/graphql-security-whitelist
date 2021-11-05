@@ -24,6 +24,12 @@ export type WhitelistPluginConfig = {
    */
   output: 'server' | 'client'
   /**
+   * @description Keeping in mind that you probably don't totally control what version of your client is up in the woods, your server should be able to answer to at least some old client and therefore some old whitelists.
+   * If you set a version, the server could get the correct whitelist.
+   * @default "latest"
+   */
+  version?: string
+  /**
    * @description Include __typename on each selection (apollo client actually use it to handle cache)
    * @default true
    *
@@ -43,6 +49,7 @@ export type WhitelistPluginConfig = {
 }
 
 const defaultConfig = {
+  version: 'latest',
   generateTypenames: true,
 }
 
@@ -112,7 +119,7 @@ export const plugin: PluginFunction<WhitelistPluginConfig, string> = (
     })
   })
 
-  return JSON.stringify(operations, null, '  ')
+  return JSON.stringify({ ...operations, version: config.version }, null, '  ')
 }
 
 export const validate: PluginValidateFn<WhitelistPluginConfig> = (
@@ -127,5 +134,11 @@ export const validate: PluginValidateFn<WhitelistPluginConfig> = (
 
   if (extname(outputFile) !== '.json') {
     throw new Error(`Plugin "operations-whitelist" requires extension to be ".json"!`)
+  }
+
+  if (!config.version) {
+    console.warn(
+      `Warning, if you'r planning to deploy this whitelist, you should definitively define a 'version' in config`
+    )
   }
 }

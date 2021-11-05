@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`operations-whitelist Client whitelist Should have queries and mutations name as keys 1`] = `
+exports[`Codegen Plugin Client whitelist Should have queries and mutations name as keys 1`] = `
 Array [
   "onCommentAdded",
   "Comment",
@@ -9,10 +9,11 @@ Array [
   "submitRepository",
   "submitComment",
   "vote",
+  "version",
 ]
 `;
 
-exports[`operations-whitelist Server whitelist Should have operations definitions as values 1`] = `
+exports[`Codegen Plugin Server whitelist Should have operations definitions as values 1`] = `
 Array [
   "subscription onCommentAdded($repoFullName: String!) {
   commentAdded(repoFullName: $repoFullName) {
@@ -144,5 +145,6 @@ Array [
     __typename
   }
 }",
+  "latest",
 ]
 `;

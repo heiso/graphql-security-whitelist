@@ -14,13 +14,14 @@
     "prepublishOnly": "tsc",
     "watch": "tsc -w --pretty --preserveWatchOutput"
   },
-  "devDependencies": {
-    "apollo-server": "^3.4.0",
+  "dependencies": {
     "apollo-server-plugin-base": "^3.3.0"
   },
+  "devDependencies": {
+    "apollo-server": "^3.4.0"
+  },
   "peerDependencies": {
-    "apollo-server": "^3.4.0",
-    "apollo-server-plugin-base": "^3.3.0"
+    "apollo-server": "^3.4.0"
   },
   "files": [
     "dist/src",

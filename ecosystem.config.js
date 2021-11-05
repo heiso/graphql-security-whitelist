@@ -28,7 +28,7 @@ module.exports = {
       name: `example:codegen`,
       autorestart: false,
       script: 'yarn example:codegen --watch',
-      watch: ['codegen-example.yml'],
+      watch: ['example/codegen.yml'],
     },
 
     {

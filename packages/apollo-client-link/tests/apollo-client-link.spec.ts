@@ -4,7 +4,7 @@ import { securityWhitelistLink } from '../src'
 
 global.fetch = fetch
 
-describe('ApolloLink', () => {
+describe('Apollo Link', () => {
   const query = gql`
     query Test($id: ID!) {
       foo(id: $id) {
@@ -14,6 +14,7 @@ describe('ApolloLink', () => {
   `
 
   const whitelist = {
+    version: 'latest',
     Test: 'somequickhash',
   }
 
@@ -31,7 +32,7 @@ describe('ApolloLink', () => {
 
   it('Should not send query', async () => {
     const link = ApolloLink.from([
-      securityWhitelistLink({ whitelist, version: 'v1' }),
+      securityWhitelistLink({ whitelist }),
       new HttpLink({ uri: 'http://hellothere' }),
     ])
 
@@ -47,7 +48,7 @@ describe('ApolloLink', () => {
         variables,
         extensions: {
           securityWhitelist: {
-            version: 'v1',
+            version: 'latest',
             hash: whitelist[operationName],
           },
         },

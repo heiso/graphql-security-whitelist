@@ -8,7 +8,7 @@ const schemas = [bookSchema]
 const server = new ApolloServer({
   typeDefs: schemas.map(({ typeDefs }) => typeDefs),
   resolvers: schemas.map(({ resolvers }) => resolvers),
-  plugins: [GraphqlSecurityWhitelistPlugin({ whitelist })],
+  plugins: [GraphqlSecurityWhitelistPlugin({ whitelists: [whitelist] })],
 })
 
 server.listen().then(({ url }) => {

@@ -29,7 +29,7 @@ const documents = [
   getDocument('vote.mutation.graphql'),
 ]
 
-describe('operations-whitelist', () => {
+describe('Codegen Plugin', () => {
   let clientOutput: string
   let serverOutput: string
 
@@ -68,7 +68,7 @@ describe('operations-whitelist', () => {
     })
 
     it('Should have hashed query as keys', async () => {
-      const parsed: Record<string, string> = JSON.parse(serverOutput)
+      const { version, ...parsed }: Record<string, string> = JSON.parse(serverOutput)
       const hashes = Object.keys(parsed)
       expect(hashes.length).toBeGreaterThan(0)
       expect(every(hashes, (hash) => hash === hashQuery(parsed[hash]))).toBeTruthy()
@@ -81,7 +81,7 @@ describe('operations-whitelist', () => {
     })
 
     it('Should add __typenames', async () => {
-      const parsed: Record<string, string> = JSON.parse(serverOutput)
+      const { version, ...parsed }: Record<string, string> = JSON.parse(serverOutput)
       const queries = Object.values(parsed)
       expect(queries.length).toBeGreaterThan(0)
       expect(every(queries, (query) => query.includes('__typename'))).toBeTruthy()
@@ -92,7 +92,9 @@ describe('operations-whitelist', () => {
         output: 'server',
         generateTypenames: false,
       })
-      const parsed: Record<string, string> = JSON.parse(serverOutputWithoutTypenames)
+      const { version, ...parsed }: Record<string, string> = JSON.parse(
+        serverOutputWithoutTypenames
+      )
       const queries = Object.values(parsed)
       expect(queries.length).toBeGreaterThan(0)
       expect(some(queries, (query) => query.includes('__typename'))).toBeFalsy()
@@ -112,7 +114,7 @@ describe('operations-whitelist', () => {
     })
 
     it('Should have hashes as values', async () => {
-      const parsed: Record<string, string> = JSON.parse(clientOutput)
+      const { version, ...parsed }: Record<string, string> = JSON.parse(clientOutput)
       const names = Object.keys(parsed)
       expect(names.length).toBeGreaterThan(0)
       expect(every(names, (name) => !!parsed[name])).toBeTruthy()
@@ -128,7 +130,7 @@ describe('operations-whitelist', () => {
     })
 
     it('Should have hashes in common', async () => {
-      const clientParsed = JSON.parse(clientOutput)
+      const { version, ...clientParsed } = JSON.parse(clientOutput)
       const serverParsed = JSON.parse(serverOutput)
       const names = Object.keys(clientParsed)
       expect(names.length).toBeGreaterThan(0)
@@ -139,6 +141,29 @@ describe('operations-whitelist', () => {
           return clientHash === hashQuery(query)
         })
       ).toBeTruthy()
+    })
+
+    it('Should have a default version', async () => {
+      const clientParsed = JSON.parse(clientOutput)
+      const serverParsed = JSON.parse(serverOutput)
+      expect(clientParsed.version).toBe('latest')
+      expect(serverParsed.version).toBe('latest')
+      expect(clientParsed.version).toBe(serverParsed.version)
+    })
+
+    it('Should have a given version', async () => {
+      const clientOutputWithCustomVersion = await plugin(schema, documents, {
+        output: 'client',
+        version: 'v1.0.0',
+      })
+      const serverOutputWithCustomVersion = await plugin(schema, documents, {
+        output: 'server',
+        version: 'v1.0.0',
+      })
+      const clientParsed: Record<string, string> = JSON.parse(clientOutputWithCustomVersion)
+      const serverParsed: Record<string, string> = JSON.parse(serverOutputWithCustomVersion)
+      expect(clientParsed.version).toBe('v1.0.0')
+      expect(serverParsed.version).toBe('v1.0.0')
     })
   })
 })
